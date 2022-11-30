@@ -11,4 +11,12 @@ const modelAddNewProduct = async (body: IProduct): Promise<IProduct> => {
   return product;
 };
 
-export default modelAddNewProduct;
+const modelGetAllProducts = async (): Promise<IProduct[]> => {
+  const [products] = await connection.execute('SELECT * FROM Trybesmith.Products');
+  return products as IProduct[];
+};
+
+export {
+  modelAddNewProduct,
+  modelGetAllProducts,
+};
