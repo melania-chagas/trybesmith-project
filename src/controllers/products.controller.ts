@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { serviceAddNewProduct, serviceGetAllProducts } from '../services/productsService';
+import { serviceAddNewProduct, serviceGetAllProducts } from '../services/products.service';
 import IProduct from '../interfaces/IProduct';
 
 const controllerAddNewProduct = async (req: Request, res: Response) => {
