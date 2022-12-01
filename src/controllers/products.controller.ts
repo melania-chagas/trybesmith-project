@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { serviceAddNewProduct, serviceGetAllProducts } from '../services/ProductsService';
-import IProduct from '../IProduct';
+import { serviceAddNewProduct, serviceGetAllProducts } from '../services/productsService';
+import IProduct from '../interfaces/IProduct';
 
 const controllerAddNewProduct = async (req: Request, res: Response) => {
   const product = req.body as IProduct;

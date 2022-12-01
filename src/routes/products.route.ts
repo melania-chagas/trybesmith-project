@@ -2,7 +2,7 @@ import { Router } from 'express';
 import {
   controllerAddNewProduct,
   controllerGetAllProducts,
-} from '../controllers/Products.controller';
+} from '../controllers/products.controller';
 
 const productsRouter = Router();
 
