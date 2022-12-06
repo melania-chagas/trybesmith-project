@@ -4,12 +4,10 @@ import jwt from 'jsonwebtoken';
 
 const secret = process.env.JWT_SECRET || 'seusecretdetoken';
 
-const createToken = (user: string): string => {
+const createToken = (username: string, id: number): string => {
   const token = jwt.sign(
     {
-      data: {
-        user,
-      },
+      data: { username, id },
     },
     secret,
     { expiresIn: '7d', algorithm: 'HS256' },
@@ -18,4 +16,16 @@ const createToken = (user: string): string => {
   return token;
 };
 
-export default createToken;
+const verifyToken = (token: string) => {
+  try {
+    const decoded = jwt.verify(token, secret);
+    return decoded;
+  } catch (error) {
+    return null;
+  }
+};
+
+export {
+  createToken,
+  verifyToken,
+}; 

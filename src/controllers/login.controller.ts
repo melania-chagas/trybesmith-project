@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import createToken from '../auth/JWT';
+import { createToken } from '../auth/JWT';
 import serviceLogin from '../services/login.service';
 
 const controllerLogin = async (req: Request, res: Response) => {
-  const userLogin = req.body;
+  const { password, username } = req.body;
 
-  const result = await serviceLogin(userLogin);
+  const result = await serviceLogin({ username, password });
 
   const message = 'Username or password invalid';
 
@@ -13,15 +13,19 @@ const controllerLogin = async (req: Request, res: Response) => {
     return res.status(401).json({ message });
   }
 
-  if (userLogin.username !== result.username) {
+  if (username !== result.username) {
     return res.status(401).json({ message });
   }
 
-  if (userLogin.password !== result.password) {
+  if (password !== result.password) {
     return res.status(401).json({ message });
   }
 
-  const token = createToken(result.username);
+  const { id } = result;
+  let token = '';
+  if (id) {
+    token = createToken(username, id);
+  }
 
   return res.status(200).json({ token });
 };

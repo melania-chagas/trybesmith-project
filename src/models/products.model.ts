@@ -16,7 +16,15 @@ const modelGetAllProducts = async (): Promise<IProduct[]> => {
   return products as IProduct[];
 };
 
+const modelUpdateProducts = async (orderId: number, productId:number) => {
+  console.log(orderId, productId);
+  const [{ affectedRows }] = await connection.execute<ResultSetHeader>(`UPDATE Trybesmith.Products
+  SET orderId = ? WHERE id = ?`, [orderId, productId]);
+  return affectedRows;
+};
+
 export {
   modelAddNewProduct,
   modelGetAllProducts,
+  modelUpdateProducts,
 };
